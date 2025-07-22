@@ -1,3 +1,50 @@
+trip_planning_task:
+  description: >
+    Handle user truck booking request by:
+    1. Understanding the user's requirement for transport from point A to point B
+    2. Search for available trucks using the truck search API
+    3. Present truck options to the user for selection
+    4. Once user selects a truck, collect detailed trip information:
+       - Consigner name and details
+       - Consignee name and details  
+       - Pickup address
+       - Delivery address
+       - Parcel size, weight, and value
+    5. Prepare all collected information for availability verification
+  expected_output: >
+    A structured trip request with all necessary details including selected truck ID,
+    consigner/consignee information, addresses, and parcel specifications ready for
+    availability verification.
+  agent: trip_planner
+
+availability_verification_task:
+  description: >
+    Verify truck availability by:
+    1. Receiving trip details from the trip planner
+    2. Contact the truck owner to verify availability for the requested dates/route
+    3. If truck is available: confirm booking and notify success
+    4. If truck is not available: notify trip planner and user to select another truck
+    5. Update the booking status accordingly
+  expected_output: >
+    A confirmation status indicating whether the truck booking was successful or if
+    the user needs to select an alternative truck, with detailed reasoning.
+  agent: availability_verifier
+
+billing_documentation_task:
+  description: >
+    Handle post-booking operations including:
+    1. Generate bilty with all trip details and pricing
+    2. Request document uploads from user (ID proof, parcel photos, etc.)
+    3. When driver confirms availability, request driver documents (license, vehicle papers)
+    4. Verify uploaded documents for completeness and validity
+    5. Update trip status continuously (Booked -> Documents Verified -> In Transit -> Delivered)
+    6. Send notifications at each status change
+    7. Generate final invoice and delivery confirmation
+  expected_output: >
+    Complete billing documentation including bilty number, document verification status,
+    current trip status, and any required follow-up actions for users or drivers.
+  agent: billing_documentation_agent
+
 research_task:
   description: >
     Conduct a thorough research about {topic}
