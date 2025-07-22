@@ -1,0 +1,20 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pip --version)",
+      "Bash(source:*)",
+      "Bash(python3 -m pip:*)",
+      "Bash(conda:*)",
+      "Bash(pipx install:*)",
+      "Bash(pip install:*)",
+      "Bash(crewai:*)",
+      "Bash(find:*)",
+      "Bash(python3:*)",
+      "Bash(mkdir:*)",
+      "Bash(chmod:*)",
+      "Bash(touch:*)",
+      "Bash(python:*)"
+    ],
+    "deny": []
+  }
+}
